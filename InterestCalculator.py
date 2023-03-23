@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 LaunchCode Demo Program
-Multi-Function Calculator (Motion/Physics?)
+Interest Calculator
 Nathan Kadlec
 """
 
