@@ -6,7 +6,6 @@ Nathan Kadlec
 """
 
 import tkinter as tk
-import tkinter.ttk as ttk
 
 
 #defs for interest calculations
@@ -67,7 +66,7 @@ def frontEnd():
             simpleResult.insert("1.0", result)
         else:
             p = float(principal)
-            i = float(interest)
+            i = float(interest) / 100
             n = float(loanTerm)
             result = str(simpleInterest(p, i, n))
             simpleResult.insert("1.0", result)
@@ -106,7 +105,7 @@ def frontEnd():
             compoundResult.insert("1.0", result) 
         else:
             p = float(principal)
-            i = float(interest)
+            i = float(interest) / 100
             n = float(compoundingPeriods)
             result = str(compoundInterest(p, i, n))
             compoundResult.insert("1.0", result)        
