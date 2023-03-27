@@ -8,19 +8,16 @@ Nathan Kadlec
 import tkinter as tk
 
 
-#defs for interest calculations
-#Option to display all previous entries/results
-#Option to clear previous queries
 #Option to save results to text file
 #Help button that plays video tutorial
 #Equations button that shows all equations
 #Exit button
 
 
-
 def main():
-    #array of arrays (format: [input1, input2, input3, result])
-    queries = []
+    #array of arrays (format: [type (simple/compound), input1, input2, input3, result])
+    simpleQueries = []
+    compoundQueries = []
     frontEnd()
 
 
@@ -36,11 +33,16 @@ def compoundInterest(p, i, n):
     result = round(result, 2)
     return result
 
+def writeResults():
+    x = 5
+
 
 def frontEnd():
+    results = []
+    
     window = tk.Tk()
     window.title("Interest Calculator")
-    window.geometry("500x500")
+    window.geometry("510x500")
     pageTitle = tk.Label(window, text = "Interest Calculator", font = ("myriad pro", 30))
     titleSpacer = tk.Label(window, text = "")
     simpleLabel = tk.Label(window, text = "Simple Interest", font = ("myriad pro", 15))
@@ -64,6 +66,8 @@ def frontEnd():
         or any(z.isalpha() for z in loanTerm)):
             result = "ERROR"
             simpleResult.insert("1.0", result)
+        if(not principal or not interest or not loanTerm):
+            result = ""
         else:
             p = float(principal)
             i = float(interest) / 100
@@ -102,7 +106,9 @@ def frontEnd():
         or any(y.isalpha() for y in interest) 
         or any(z.isalpha() for z in compoundingPeriods)):
             result = "ERROR"
-            compoundResult.insert("1.0", result) 
+            compoundResult.insert("1.0", result)
+        if(not principal or not interest or not compoundingPeriods):
+            result = ""
         else:
             p = float(principal)
             i = float(interest) / 100
@@ -131,7 +137,7 @@ def frontEnd():
     simpleN.grid(row = 5, column = 1)
     simpleResultLabel.grid(row = 6)
     simpleResult.grid(row = 6, column = 1)
-    operationSpacer.grid(row = 8, pady = 10)
+    operationSpacer.grid(row = 8)
     compoundLabel.grid(row = 9)
     pLabel2.grid(row = 10)
     compoundP.grid(row = 10, column = 1)
@@ -142,6 +148,10 @@ def frontEnd():
     compoundResultLabel.grid(row = 13)
     compoundResult.grid(row = 13, column = 1)
     
+    bottomSpacer = tk.Label(window, text = "").grid(row = 15)
+    tk.Button(window, text = "EXIT", command = window.destroy).grid(row = 16, column = 3, padx = 6)
+    tk.Button(window, text = "SAVE RESULTS").grid(row = 16, column = 1)
+    tk.Button(window, text = "HELP").grid(row = 16, column = 2)
     
     window.mainloop()
     
