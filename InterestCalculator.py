@@ -52,7 +52,7 @@ def frontEnd():
     nLabel1 = tk.Label(window, text = "Loan term", font = ("myriad pro", 10))
     simpleN = tk.Entry(window, width = 10)
     simpleResultLabel = tk.Label(window, text = "RESULT", font = ("myriad pro", 10, "bold"))
-    simpleResult = tk.Text(window, height = 1, width = 8, relief = "raised")
+    simpleResult = tk.Text(window, height = 1, width = 12, relief = "raised")
     
     def calculateSimple():
         simpleResult.delete("1.0", "end")
@@ -78,8 +78,8 @@ def frontEnd():
         simpleN.delete(first = 0, last = "end")
         simpleResult.delete("1.0", "end")
     
-    tk.Button(window, text = "CALCULATE", command = calculateSimple).grid(row = 7, column = 0, pady = 10)
-    tk.Button(window, text = "CLEAR", command = clearSimple).grid(row = 7, column = 1, pady = 10)
+    tk.Button(window, text = "CALCULATE", command = calculateSimple).grid(row = 7, column = 1, pady = 10)
+    tk.Button(window, text = "CLEAR", command = clearSimple).grid(row = 7, column = 0, pady = 10)
     
     operationSpacer = tk.Label(window, text = "")
     
@@ -91,7 +91,7 @@ def frontEnd():
     nLabel2 = tk.Label(window, text = "Compounding periods per year", font = ("myriad pro", 10))
     compoundN = tk.Entry(window, width = 10)
     compoundResultLabel = tk.Label(window, text = "RESULT", font = ("myriad pro", 10, "bold"))
-    compoundResult = tk.Text(window, height = 1, width = 8, relief = "raised")
+    compoundResult = tk.Text(window, height = 1, width = 12, relief = "raised")
     
     def calculateCompound():
         compoundResult.delete("1.0", "end")
@@ -117,8 +117,8 @@ def frontEnd():
         compoundN.delete(first = 0, last = "end")
         compoundResult.delete("1.0", "end")
     
-    tk.Button(window, text = "CALCULATE", command = calculateCompound).grid(row = 14, column = 0, pady = 10)
-    tk.Button(window, text = "CLEAR", command = clearCompound).grid(row = 14, column = 1, pady = 10)
+    tk.Button(window, text = "CALCULATE", command = calculateCompound).grid(row = 14, column = 1, pady = 10)
+    tk.Button(window, text = "CLEAR", command = clearCompound).grid(row = 14, column = 0, pady = 10)
     
     #Grid alignment
     pageTitle.grid(row = 0)
