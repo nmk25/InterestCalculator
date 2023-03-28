@@ -7,17 +7,13 @@ Nathan Kadlec
 
 import tkinter as tk
 
-
-#Option to save results to text file
-#Help button that plays video tutorial
-#Equations button that shows all equations
-#Exit button
+#list of lists 
+#format: [type (simple/compound), input1 (p), input2 (i), input3 (n), result]
+queries = []
 
 
 def main():
-    #array of arrays (format: [type (simple/compound), input1, input2, input3, result])
-    simpleQueries = []
-    compoundQueries = []
+    
     frontEnd()
 
 
@@ -33,16 +29,26 @@ def compoundInterest(p, i, n):
     result = round(result, 2)
     return result
 
+#Saves all completed calculations to text file in same directory as InterestCalculator.py
 def writeResults():
-    x = 5
+    writeArr = queries
+    with open("Interest_Results", "w") as x:
+        for query in writeArr:
+            x.write(query[0] + ":  ")
+            x.write("principal: " + query[1] + "  ")
+            x.write("interest rate: " + query[2] + "  ")
+            if(query[0] == "Simple Interest"):
+                x.write("loan term: " + query[3] + "  ")
+            else:
+                x.write("compounding periods: " + query[3] + "  ")
+            x.write("RESULT: " + query[4])
+            x.write('\n')
 
 
 def frontEnd():
-    results = []
-    
     window = tk.Tk()
     window.title("Interest Calculator")
-    window.geometry("510x500")
+    window.geometry("475x525")
     pageTitle = tk.Label(window, text = "Interest Calculator", font = ("myriad pro", 30))
     titleSpacer = tk.Label(window, text = "")
     simpleLabel = tk.Label(window, text = "Simple Interest", font = ("myriad pro", 15))
@@ -73,6 +79,8 @@ def frontEnd():
             i = float(interest) / 100
             n = float(loanTerm)
             result = str(simpleInterest(p, i, n))
+            calculationArr = ["Simple Interest", principal, interest, loanTerm, result]
+            queries.append(calculationArr)
             simpleResult.insert("1.0", result)
     
     def clearSimple():
@@ -114,6 +122,8 @@ def frontEnd():
             i = float(interest) / 100
             n = float(compoundingPeriods)
             result = str(compoundInterest(p, i, n))
+            calculationArr = ["Compound Interest", principal, interest, compoundingPeriods, result]
+            queries.append(calculationArr)
             compoundResult.insert("1.0", result)        
     
     def clearCompound():
@@ -148,17 +158,47 @@ def frontEnd():
     compoundResultLabel.grid(row = 13)
     compoundResult.grid(row = 13, column = 1)
     
-    bottomSpacer = tk.Label(window, text = "").grid(row = 15)
-    tk.Button(window, text = "EXIT", command = window.destroy).grid(row = 16, column = 3, padx = 6)
-    tk.Button(window, text = "SAVE RESULTS").grid(row = 16, column = 1)
-    tk.Button(window, text = "HELP").grid(row = 16, column = 2)
+    tk.Label(window, text = "").grid(row = 15)
+    tk.Button(window, text = "EXIT", width = 5, command = window.destroy).grid(row = 17, column = 2)
+    
+    def saveResults():
+        writeResults()
+        saveConfirm = tk.Toplevel()
+        saveConfirm.wm_transient(window)
+        winX = window.winfo_x()
+        winY = window.winfo_y()
+        saveConfirm.geometry("+%d+%d" %(winX + 135, winY + 265))
+        saveConfirm.title("Success")
+        saveConfirm.geometry("210x50")
+        tk.Label(saveConfirm, text = "Calculation results were saved.", font = ("myriad pro", 11)).grid(row = 0, column = 0)
+        tk.Button(saveConfirm, text = "OK", command = saveConfirm.destroy).grid(row = 1)
+        
+    tk.Button(window, text = "SAVE RESULTS", width = 11, command = saveResults).grid(row = 16, column = 1, pady = 5)
+    
+    def displayEquations():
+        equationsBox = tk.Toplevel()
+        equationsBox.wm_transient(window)
+        winX = window.winfo_x()
+        winY = window.winfo_y()
+        equationsBox.geometry("+%d+%d" %(winX + 35, winY + 200))
+        equationsBox.title("Equations")
+        equationsBox.geometry("400x150")
+        tk.Label(equationsBox, text = "Simple Interest = P x i x n\nWhere 'P' is the principal, 'i' is the interest rate percentage,\nand 'n' is the term of the loan in years.", font = ("myriad pro", 10)).grid(row = 0)
+        tk.Label(equationsBox, text = "Compound Interest = P((1 + i)^n - 1)\nWhere 'P' is the principal, 'i' is the interest rate percentage,\nand 'n' is the amount of times the interest is compounded per year.", font = ("myriad pro", 10)).grid(row = 1)
+        tk.Button(equationsBox, text = "OK", command = equationsBox.destroy).grid(row = 2, pady = 10)
+        
+    tk.Button(window, text = "EQUATIONS", width = 11, command = displayEquations).grid(row = 17, column = 1)
+    
+    def displayHelp():
+        helpBox = tk.Toplevel()
+        helpBox.wm_transient(window)
+        winX = window.winfo_x()
+        winY = window.winfo_y()
+        helpBox.geometry("+%d+%d" %(winX + 35, winY + 200))
+    
+    tk.Button(window, text = "HELP", width = 5).grid(row = 16, column = 2)
     
     window.mainloop()
-    
-
-    
-#Adds user inputs and result to queries array
-#def appendQuery(inputArr):
 
     
 if __name__ == "__main__":
