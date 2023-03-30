@@ -7,6 +7,7 @@ Nathan Kadlec
 
 import tkinter as tk
 
+
 #list of lists 
 #format: [type (simple/compound), input1 (p), input2 (i), input3 (n), result]
 queries = []
@@ -16,7 +17,9 @@ def main():
     
     frontEnd()
 
-
+    #Beef up main or reallocate other functions here
+    
+    
 #Equations courtesy of Investopedia.com
 
 def simpleInterest(p, i, n):
@@ -182,9 +185,9 @@ def frontEnd():
         winY = window.winfo_y()
         equationsBox.geometry("+%d+%d" %(winX + 35, winY + 200))
         equationsBox.title("Equations")
-        equationsBox.geometry("400x150")
-        tk.Label(equationsBox, text = "Simple Interest = P x i x n\nWhere 'P' is the principal, 'i' is the interest rate percentage,\nand 'n' is the term of the loan in years.", font = ("myriad pro", 10)).grid(row = 0)
-        tk.Label(equationsBox, text = "Compound Interest = P((1 + i)^n - 1)\nWhere 'P' is the principal, 'i' is the interest rate percentage,\nand 'n' is the amount of times the interest is compounded per year.", font = ("myriad pro", 10)).grid(row = 1)
+        equationsBox.geometry("369x150")
+        tk.Label(equationsBox, text = "Simple Interest = P x i x n\nWhere 'P' is the principal, 'i' is the interest rate\npercentage, and 'n' is the term of the loan in years.", font = ("myriad pro", 10)).grid(row = 0)
+        tk.Label(equationsBox, text = "Compound Interest = P((1 + i)^n - 1)\nWhere 'P' is the principal, 'i' is the interest rate percentage, and\n'n' is the amount of times the interest is compounded per year.", font = ("myriad pro", 10)).grid(row = 1)
         tk.Button(equationsBox, text = "OK", command = equationsBox.destroy).grid(row = 2, pady = 10)
         
     tk.Button(window, text = "EQUATIONS", width = 11, command = displayEquations).grid(row = 17, column = 1)
@@ -195,8 +198,23 @@ def frontEnd():
         winX = window.winfo_x()
         winY = window.winfo_y()
         helpBox.geometry("+%d+%d" %(winX + 35, winY + 200))
+        helpBox.title("Help")
+        helpBox.geometry("703x400")
+        tk.Label(helpBox, text = "Using the Interest Calculator", font = ("myriad pro", 15, "bold")).grid(row = 0)
+        tk.Label(helpBox, text = "This calculator is used to find the total interest accrued for a given loan/investment.", font = ("myriad pro", 10)).grid(row = 1)
+        tk.Label(helpBox, text = "To calculate simple interest, enter the principal, interest rate (as a percentage, ex. 5% as 5)\n and the loan term (in years) in their corresponding boxes.", font = ("myriad pro", 10)).grid(row = 2)
+        tk.Label(helpBox, text = "To calculate compound interest, enter the principal, interest rate (as a percentage, ex. 5% as 5)\n and the number of times the interest is compounded per year in their corresponding boxes.", font = ("myriad pro", 10)).grid(row = 3)
+        tk.Label(helpBox, text = "Once the information is entered, press the 'CALCULATE' button, and the result will appear in the box labeled 'RESULT.'", font = ("myriad pro", 10)).grid(row = 4)
+        tk.Label(helpBox, text = "The 'CLEAR' button will erase all boxes for a selected interest calculation.", font = ("myriad pro", 10)).grid(row = 5)
+        tk.Label(helpBox, text = "The 'EQUATIONS' button will display a pop-up box that shows the equations used to calculate interest.", font = ("myriad pro", 10)).grid(row = 6)
+        tk.Label(helpBox, text = "The 'SAVE RESULTS' button will save a text file (Interest_Results.txt) in the same directory as the\n Interest Calculator with records of every calculation performed in the current instance of the program.\nIf you intend to keep the results, make sure to either move the file to another directory, or\nrename the file. Otherwise, it will be overwritten the next time 'SAVE RESULTS' is pressed.", font = ("myriad pro", 10)).grid(row = 7)
+        tk.Label(helpBox, text = "The 'EXIT' button will close the Interest Calculator window.", font = ("myriad pro", 10)).grid(row = 8)
+        tk.Label(helpBox, text = "Please ensure you are only entering numbers in the boxes. (Periods for decimals are okay) \nEntering any alphabetical characters will cause 'ERROR' to display in the result box.", font = ("myriad pro", 10)).grid(row = 9)
+        tk.Label(helpBox, text = "Any questions, concerns, or suggestions can be directed to nkadlec25@gmail.com. Thanks for using Interest Calculator!", font = ("myriad pro", 10)).grid(row = 10)
+        
+        tk.Button(helpBox, text = "OK", command = helpBox.destroy).grid(row = 11, pady = 10)
     
-    tk.Button(window, text = "HELP", width = 5).grid(row = 16, column = 2)
+    tk.Button(window, text = "HELP", width = 5, command = displayHelp).grid(row = 16, column = 2)
     
     window.mainloop()
 
